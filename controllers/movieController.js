@@ -13,4 +13,19 @@ const createMovie = async (req, res) => {
   res.status(201).json(movie);
 };
 
-module.exports = { getAllMovies, createMovie };
+const findmovie=async(req,res)=>{
+  try{const{title}=req.body;
+  const movie=await Movie.findOne({where:{title}});
+
+  if(movie){
+    res.json(movie);
+  }else{
+    res.status(404).json({  error:"movie is not found"});
+  }}
+  catch(err){
+    console.log(err);
+  }
+
+}
+
+module.exports = { getAllMovies, createMovie,findmovie };
